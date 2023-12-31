@@ -25,7 +25,7 @@ const CourseSwap = () => {
     };
 
     axios
-      .post("https://swapper-server.onrender.com//swap/add", swapRequestData, {
+      .post("https://swapper-server.onrender.com/swap/add", swapRequestData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access-token")}`,
         },
