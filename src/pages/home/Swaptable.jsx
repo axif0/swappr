@@ -14,24 +14,24 @@ const SwapCourses = () => {
     },
   });
 
-  const handleDeleteSwapCourse = async (swapCourse) => {
-    try {
-      // Optimistically update the UI
-      const newSwapCourses = swapCourses.filter(sc => sc._id !== swapCourse._id);
-      // Update state or context with newSwapCourses here
+  // const handleDeleteSwapCourse = async (swapCourse) => {
+  //   try {
+  //     // Optimistically update the UI
+  //     const newSwapCourses = swapCourses.filter(sc => sc._id !== swapCourse._id);
+  //     // Update state or context with newSwapCourses here
   
-      const res = await axiosSecure.delete(`/swap/delete/${swapCourse._id}`);
-      alert(`Swap course for user ${swapCourse.user} is removed from database`);
+  //     const res = await axiosSecure.delete(`/swap/delete/${swapCourse._id}`);
+  //     alert(`Swap course for user ${swapCourse.user} is removed from database`);
      
   
-      // Optionally refetch if you want to confirm the server state
-      refetch();
-    } catch (error) {
-      console.log(swapCourse._id)
-      alert('Failed to delete swap course. Please try again.');
-      // Revert optimistic update if necessary
-    }
-  }
+  //     // Optionally refetch if you want to confirm the server state
+  //     refetch();
+  //   } catch (error) {
+  //     console.log(swapCourse._id)
+  //     alert('Failed to delete swap course. Please try again.');
+  //     // Revert optimistic update if necessary
+  //   }
+  // }
   
 
   return (
@@ -54,7 +54,7 @@ const SwapCourses = () => {
               <th>Interested Sections</th>
               <th>Is Available</th>
               <th>Reward</th>
-              <th>Action</th>
+              {/* <th>Action</th> */}
             </tr>
           </thead>
           <tbody>
@@ -69,11 +69,11 @@ const SwapCourses = () => {
                 <td>{swapCourse.interestedSections.join(", ")}</td>
                 <td>{swapCourse.isAvailable ? "Yes" : "No"}</td>
                 <td>{swapCourse.reward}</td>
-                <td>
+                {/* <td>
                   <button onClick={() => handleDeleteSwapCourse(swapCourse)} className="btn btn-xs bg-orange-500 text-white">
                     <FaTrashAlt />
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

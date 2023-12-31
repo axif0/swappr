@@ -134,9 +134,9 @@ const CourseSwap = () => {
 
         <button
           type="submit"
-          className="bg-green-500 text-white p-2 rounded hover:bg-green-600"
+          className="bg-green-500 text-black p-2 rounded hover:bg-green-600"
         >
-          Submit
+          press me to submit
         </button>
       </form>
     </div>
