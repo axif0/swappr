@@ -24,11 +24,13 @@ const Cards = ({ item }) => {
       // Assuming some functionality for Add to Cart operations
       // Show a SweetAlert modal with user email and whySwap
       Swal.fire({
-        title: 'Dealer Info',
+        title: 'Details',
         html: `
           <p><strong>User Email:</strong> ${user}</p>
-          <p><strong>Why Swap:</strong> ${semester}</p>
-          <p><strong>reward:</strong> ${reward}</p>
+          <br>
+          <p><strong>Swap Reason:</strong> ${semester}</p>
+          <br>
+          <p><strong>Reward:</strong> ${reward}</p>
         `,
         icon: 'info',
         showConfirmButton: false,
@@ -51,7 +53,7 @@ const Cards = ({ item }) => {
   };
 
   return (
-    <div className="card shadow-xl relative mr-5 md:my-5">
+    <div className="card bg-gray-800 shadow-xl relative mr-5 md:my-5" style={{ width: '250px', height: '350px' }}>
       <div
         className={`absolute right-2 top-2 p-4 ${
           isHeartFilled ? "text-rose-500" : "text-white"
@@ -60,16 +62,21 @@ const Cards = ({ item }) => {
       >
         {/* Heart icon or any other icon */}
       </div>
+      
       <div className="card-body">
         <h2 className="card-title"></h2>
-        <p>Dealer Course: {dealerCourse}</p>
-        <p>Dealer Section: {dealerSection}</p>
-        <p>Interested Course: {interestedCourse.join(", ")}</p>
-        <p>Interested Sections: {interestedSections.join(", ")}</p>
-        <p>Is Available: {isAvailable ? "Yes" : "No"}</p>
+        <p>Has: {dealerCourse} ({dealerSection})</p>
+        <p>Needs: {interestedCourse.map((course, index) => `${course} (${interestedSections[index]})`).join(", ")}</p>
+        <p>Availability: <span style={{ color: isAvailable ? "lightgreen" : "red", fontWeight: "bold" }}>{isAvailable ? "Yes" : "No"}</span></p>
 
         <div className="card-actions justify-between items-center mt-2">
-          <button onClick={handleAddToCart} className="btn bg-green text-white">Info</button>
+        <button
+          onClick={handleAddToCart}
+          className="btn bg-green text-white focus:outline-none"
+          style={{ border: 'none' }}
+        >
+        View Details
+        </button>
         </div>
       </div>
     </div>
