@@ -42,25 +42,26 @@ const Navbar = () => {
 
   const navItems = (
     <>
-      <li>
-        <a href="/" className="text-green">
-          Home
-        </a>
-      </li>
-       
-      
-      <li>
-        <Link to="/swaptable">Available Deals</Link>
-      </li>
-      <li>
-      <li>
-        {/* Link to the user-specific route using userId */}
-        <Link to={`/swap/${userId}`}>Edit your deals</Link>
-      </li>
-
-</li>
-
-    </>
+    <li>
+      <a href="/" className="text-green">
+        Home
+      </a>
+    </li>
+     
+    
+    <li>
+      <Link to="/swaptable" className="text-green">
+        Available Deals
+      </Link>
+    </li>
+  
+    <li>
+      <Link to={`/swap/${userId}`} className="text-green">
+        Edit your deals
+      </Link>
+    </li>
+  </>
+  
   );
 
   return (
@@ -107,6 +108,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
         <div className="navbar-end">
+        
         
 
           {user ? (

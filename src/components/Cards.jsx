@@ -21,13 +21,18 @@ const Cards = ({ item }) => {
   const handleAddToCart = () => {
     // Assuming some functionality for Add to Cart, update as needed
     if (currentUser) {
-      // Perform Add to Cart operations
+      // Assuming some functionality for Add to Cart operations
+      // Show a SweetAlert modal with user email and whySwap
       Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Item added to the cart.',
+        title: 'Dealer Info',
+        html: `
+          <p><strong>User Email:</strong> ${user}</p>
+          <p><strong>Why Swap:</strong> ${semester}</p>
+          <p><strong>reward:</strong> ${reward}</p>
+        `,
+        icon: 'info',
         showConfirmButton: false,
-        timer: 1500
+        showCloseButton: true,
       });
     } else {
       Swal.fire({
@@ -36,14 +41,14 @@ const Cards = ({ item }) => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Login now!'
+        confirmButtonText: 'Login now!',
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate('/login', {state: {from: location}});
+          navigate('/login', { state: { from: location } });
         }
       });
     }
-  }
+  };
 
   return (
     <div className="card shadow-xl relative mr-5 md:my-5">
@@ -56,17 +61,15 @@ const Cards = ({ item }) => {
         {/* Heart icon or any other icon */}
       </div>
       <div className="card-body">
-        <h2 className="card-title">User ID: {user}</h2>
-        <p>Why Swap: {semester}</p>
+        <h2 className="card-title"></h2>
         <p>Dealer Course: {dealerCourse}</p>
         <p>Dealer Section: {dealerSection}</p>
         <p>Interested Course: {interestedCourse.join(", ")}</p>
         <p>Interested Sections: {interestedSections.join(", ")}</p>
         <p>Is Available: {isAvailable ? "Yes" : "No"}</p>
-        <p>Reward: {reward}</p>
 
         <div className="card-actions justify-between items-center mt-2">
-          <button onClick={handleAddToCart} className="btn bg-green text-white">Add to Cart</button>
+          <button onClick={handleAddToCart} className="btn bg-green text-white">Info</button>
         </div>
       </div>
     </div>
