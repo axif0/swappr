@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const CourseSwap = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
+ 
   const {
     register,
     handleSubmit,
@@ -60,7 +60,7 @@ const CourseSwap = () => {
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
-            Semester
+            why Swap
           </label>
           <input
             type="text"
@@ -134,10 +134,11 @@ const CourseSwap = () => {
 
         <button
           type="submit"
-          className="bg-green-500 text-black p-2 rounded hover:bg-green-600"
+          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
         >
-          press me to submit
+          Press me to submit
         </button>
+
       </form>
     </div>
   );
