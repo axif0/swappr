@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { FaTrashAlt ,FaEdit, FaCheck } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const EditUserSwapCourses = () => {
   const axiosSecure = useAxiosSecure();
@@ -88,93 +88,90 @@ const EditUserSwapCourses = () => {
   if (isLoading) return 'Loading...';
   if (error) return `An error occurred: ${error.message}`;
 
-return (
-  <div>
-    <div className="flex items-center justify-between m-4">
-      <h5>All Swap Courses</h5>
-      <h5>Total Swap Courses: {swapCourses.length}</h5>
-    </div>
-
-    <div className="overflow-x-auto">
-      <table className="table table-zebra md:w-[870px]">
-        <thead className="bg-green text-white rounded-lg">
-          <tr>
-            <th>#</th>
-            <th>User ID</th>
-            <th>Semester</th>
-            <th>Dealer Course</th>
-            <th>Dealer Section</th>
-            <th>Interested Course</th>
-            <th>Interested Sections</th>
-            <th>Is Available</th>
-            <th>Reward</th>
-            <th>Delete</th>
-            <th>Edit/Save</th>
-          </tr>
-        </thead>
-        <tbody>
-          {swapCourses.map((swapCourse, index) => (
-            <tr key={swapCourse._id}>
-              <th scope="row">{index + 1}</th>
-              <td>{swapCourse.user}</td>
+  return (
+    <div>
+      <div className="flex items-center justify-between m-4">
+        <h5>All Swap Courses</h5>
+        <h5>Total Swap Courses: {swapCourses.length}</h5>
+      </div>
+  
+      <div className="flex flex-wrap justify-start">
+        {swapCourses.map((swapCourse, index) => (
+          <div key={swapCourse._id} className="card shadow-lg m-4 w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
+            <div className="card-body">
               {editModeIndex === index ? (
-                // Render input fields for the row in edit mode
+                // Render input fields for the card in edit mode
                 <>
-                  <td><input type="text" value={editedCourse.semester} onChange={(e) => setEditedCourse({ ...editedCourse, semester: e.target.value })} /></td>
-                  <td><input type="text" value={editedCourse.dealerCourse} onChange={(e) => setEditedCourse({ ...editedCourse, dealerCourse: e.target.value })} /></td>
-                  <td><input type="text" value={editedCourse.dealerSection} onChange={(e) => setEditedCourse({ ...editedCourse, dealerSection: e.target.value })} /></td>
-                  <td><input type="text" value={editedCourse.interestedCourse.join(', ')} onChange={(e) => setEditedCourse({ ...editedCourse, interestedCourse: e.target.value.split(', ') })} /></td>
-                  <td><input type="text" value={editedCourse.interestedSections.join(', ')} onChange={(e) => setEditedCourse({ ...editedCourse, interestedSections: e.target.value.split(', ') })} /></td>
-                  <td>
-                    <select value={editedCourse.isAvailable ? 'Yes' : 'No'} onChange={(e) => setEditedCourse({ ...editedCourse, isAvailable: e.target.value === 'Yes' })}>
-                      <option value="Yes">Yes</option>
-                      <option value="No">No</option>
-                    </select>
-                  </td>
-                  <td><input type="text" value={editedCourse.reward} onChange={(e) => setEditedCourse({ ...editedCourse, reward: e.target.value })} /></td>
-                  <td>
-                    <button onClick={() => handleDeleteSwapCourse(swapCourse)} className="btn btn-xs bg-orange-500 text-white">
-                      <FaTrashAlt />
-                    </button>
-                  </td>
-                  <td>
-                    <button onClick={handleUpdateSwapCourse} className="btn btn-xs bg-green-500 text-white">
-                      <FaCheck />
-                    </button>
-                    <button onClick={handleCancelEdit} className="btn btn-xs bg-red-500 text-white">
-                      Cancel
-                    </button>
-                  </td>
-                </>
+                <div className="mb-2">
+                  <label className="block mb-1">Semester:</label>
+                  <input type="text" value={editedCourse.semester} onChange={(e) => setEditedCourse({ ...editedCourse, semester: e.target.value })} className="w-full px-2 py-1 border rounded" />
+                </div>
+                <div className="mb-2">
+                  <label className="block mb-1">Dealer Course:</label>
+                  <input type="text" value={editedCourse.dealerCourse} onChange={(e) => setEditedCourse({ ...editedCourse, dealerCourse: e.target.value })} className="w-full px-2 py-1 border rounded" />
+                </div>
+                <div className="mb-2">
+                  <label className="block mb-1">Dealer Section:</label>
+                  <input type="text" value={editedCourse.dealerSection} onChange={(e) => setEditedCourse({ ...editedCourse, dealerSection: e.target.value })} className="w-full px-2 py-1 border rounded" />
+                </div>
+                <div className="mb-2">
+                  <label className="block mb-1">Interested Course:</label>
+                  <input type="text" value={editedCourse.interestedCourse.join(', ')} onChange={(e) => setEditedCourse({ ...editedCourse, interestedCourse: e.target.value.split(', ') })} className="w-full px-2 py-1 border rounded" />
+                </div>
+                <div className="mb-2">
+                  <label className="block mb-1">Interested Sections:</label>
+                  <input type="text" value={editedCourse.interestedSections.join(', ')} onChange={(e) => setEditedCourse({ ...editedCourse, interestedSections: e.target.value.split(', ') })} className="w-full px-2 py-1 border rounded" />
+                </div>
+                <div className="mb-2">
+                  <label className="block mb-1">Is Available:</label>
+                  <select value={editedCourse.isAvailable ? 'Yes' : 'No'} onChange={(e) => setEditedCourse({ ...editedCourse, isAvailable: e.target.value === 'Yes' })} className="w-full px-2 py-1 border rounded">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <div className="mb-2">
+                  <label className="block mb-1">Reward:</label>
+                  <input type="text" value={editedCourse.reward} onChange={(e) => setEditedCourse({ ...editedCourse, reward: e.target.value })} className="w-full px-2 py-1 border rounded" />
+                </div>
+                <div className="flex justify-end space-x-2">
+                  <button onClick={handleUpdateSwapCourse} className="btn bg-green-500 text-white flex items-center">
+                    <FaCheck className="mr-1" /> Save
+                  </button>
+                  <button onClick={handleCancelEdit} className="btn bg-red-500 text-white flex items-center">
+                    Cancel
+                  </button>
+                </div>
+              </>
+              
               ) : (
-                // Render text for rows not in edit mode
+                // Render text for cards not in edit mode
                 <>
-                  <td>{swapCourse.semester}</td>
-                  <td>{swapCourse.dealerCourse}</td>
-                  <td>{swapCourse.dealerSection}</td>
-                  <td>{swapCourse.interestedCourse.join(', ')}</td>
-                  <td>{swapCourse.interestedSections.join(', ')}</td>
-                  <td>{swapCourse.isAvailable ? 'Yes' : 'No'}</td>
-                  <td>{swapCourse.reward}</td>
-                  <td>
-                    <button onClick={() => handleDeleteSwapCourse(swapCourse)} className="btn btn-xs bg-orange-500 text-white">
-                      <FaTrashAlt />
-                    </button>
-                  </td>
-                  <td>
-                    <button onClick={() => handleEditSwapCourse(swapCourse, index)} className="btn btn-xs bg-orange-500 text-white">
-                      <FaEdit />
-                    </button>
-                  </td>
-                </>
+                <h5 className="card-title">User ID: {swapCourse.user}</h5>
+                <p>Why Swap: {swapCourse.semester}</p>
+                <p>Dealer Course: {swapCourse.dealerCourse}</p>
+                <p>Dealer Section: {swapCourse.dealerSection}</p>
+                <p>Interested Course: {swapCourse.interestedCourse.join(', ')}</p>
+                <p>Interested Sections: {swapCourse.interestedSections.join(', ')}</p>
+                <p>Is Available: {swapCourse.isAvailable ? 'Yes' : 'No'}</p>
+                <p>Reward: {swapCourse.reward}</p>
+                <div className="flex justify-end space-x-2 mt-2">
+                  <button onClick={() => handleDeleteSwapCourse(swapCourse)} className="btn bg-orange-500 text-white flex items-center">
+                    <FaTrashAlt className="mr-1" /> Delete
+                  </button>
+                  <button onClick={() => handleEditSwapCourse(swapCourse, index)} className="btn bg-blue-500 text-white flex items-center">
+                    <FaEdit className="mr-1" /> Edit
+                  </button>
+                </div>
+              </>
+              
               )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+  
 
 };
 
