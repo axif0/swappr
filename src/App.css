@@ -131,3 +131,16 @@ input[type="number"] {
 
 /* styles.css */
 
+/* Add to your CSS file */
+
+/* Assuming .navbar-container is your navbar class */
+.navbar-container {
+  z-index: 10; /* or any number higher than the z-index of the main content */
+  /* ... other styles ... */
+}
+
+/* Assuming .section-container is the main content class */
+.section-container {
+  margin-top: 60px; /* Adjust the value so the content starts below the navbar */
+  /* ... other styles ... */
+}
