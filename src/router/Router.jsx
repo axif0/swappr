@@ -28,10 +28,6 @@ const router = createBrowserRouter([
             element: <Home/>
         },
         {
-          path: "/menu",
-          element: <Menu/>
-        },
-        {
           path: "/course-swap",
           element: <CourseSwap/>
         },
@@ -51,10 +47,7 @@ const router = createBrowserRouter([
           path: "/update-profile",
           element: <UserProfile/>
         },
-        {
-          path: "/cart-page",
-          element: <CartPage/>
-        }
+        
       ]
     },
     {
@@ -78,18 +71,10 @@ const router = createBrowserRouter([
           element: <Users/>
         },
         {
-          path: 'add-menu',
-          element: <AddMenu/>
-        }, 
-        {
           path: "manage-items",
           element: <ManageItems/>
         },
-        {
-          path: "update-menu/:id",
-          element: <UpdateMenu/>,
-          loader: ({params}) => fetch(`https://swapper-server.onrender.com/menu/${params.id}`)
-        }
+        
       ]
     }
   ]);

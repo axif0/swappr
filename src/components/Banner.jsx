@@ -10,8 +10,8 @@ const Banner = () => {
       <div className="py-24 flex flex-col md:flex-row-reverse items-center justify-between gap-8">
 
         {/* img */}
-        <div className="md:w-1/2">
-        <img src={bannerImg} alt="" className="rounded-3xl" />
+        <div className="md:w-1/2 mb-8 md:mb-0"> {/* Add margin-bottom utility classes */}
+          <img src={bannerImg} alt="" className="rounded-3xl" />
           <div className="flex flex-col md:flex-row items-center justify-around -mt-14 gap-4">
             {/* <div className="bg-white px-3 py-2 rounded-2xl flex items-center gap-3 shadow-sm w-64">
               <img src="/images/home/b-food1.png" alt=""  className="rounded-2xl"/>
@@ -101,10 +101,10 @@ const Banner = () => {
         {/* texts */}
         <div className="md:w-1/2 px-4 space-y-7">
         <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">
-        Worried about swapping courses? <span className="text-green">Find your perfect course</span>
+        Stressed about swapping courses? <span className="text-green">Find the perfect match with swappr!</span>
           </h2>
          
-          <button className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
+          <button className="bg-mygreen font-semibold btn text-white px-8 py-3 rounded-full">
           <Link to={`/swaptable`}>Available Deals</Link>
         </button>
 

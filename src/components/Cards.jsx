@@ -6,7 +6,8 @@ import Swal from 'sweetalert2';
 const Cards = ({ item }) => {
   const { 
     user, semester, dealerCourse, dealerSection, 
-    interestedCourse, interestedSections, isAvailable, reward
+    interestedCourse, interestedSections, isAvailable, reward,
+    studentId,contact
   } = item;
 
   const {user: currentUser} = useContext(AuthContext);
@@ -31,6 +32,8 @@ const Cards = ({ item }) => {
           <p><strong>Swap Reason:</strong> ${semester}</p>
           <br>
           <p><strong>Reward:</strong> ${reward}</p>
+          <p>Student ID: ${studentId}</p>
+        <p>Contact: ${contact}</p>
         `,
         icon: 'info',
         showConfirmButton: false,
@@ -64,19 +67,19 @@ const Cards = ({ item }) => {
       </div>
       
       <div className="card-body">
-        <h2 className="card-title"></h2>
-        <p>Has: {dealerCourse} ({dealerSection})</p>
-        <p>Needs: {interestedCourse.map((course, index) => `${course} (${interestedSections[index]})`).join(", ")}</p>
-        <p>Availability: <span style={{ color: isAvailable ? "lightgreen" : "red", fontWeight: "bold" }}>{isAvailable ? "Yes" : "No"}</span></p>
+        <h2 className="card-title text-white"></h2>
+        <p><strong className="text-white">Has →</strong> {dealerCourse} ({dealerSection})</p>
+        <p><strong className="text-white">Needs →</strong> {interestedCourse.map((course, index) => `${course} (${interestedSections[index]})`).join(", ")}</p>
+        <p><strong className="text-white">Availability →</strong> <span style={{ color: isAvailable ? "lightgreen" : "red", fontWeight: "bold" }}>{isAvailable ? "Yes" : "No"}</span></p>
 
         <div className="card-actions justify-between items-center mt-2">
-        <button
-          onClick={handleAddToCart}
-          className="btn bg-green text-white focus:outline-none"
-          style={{ border: 'none' }}
-        >
-        View Details
-        </button>
+          <button
+            onClick={handleAddToCart}
+            className="btn bg-mygreen text-white focus:outline-none mx-auto"
+            style={{ border: 'none' }}
+          >
+            View Details
+          </button>
         </div>
       </div>
     </div>

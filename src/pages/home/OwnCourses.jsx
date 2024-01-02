@@ -90,10 +90,7 @@ const EditUserSwapCourses = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between m-4">
-        <h5>All Swap Courses</h5>
-        <h5>Total Swap Courses: {swapCourses.length}</h5>
-      </div>
+ 
   
       <div className="flex flex-wrap justify-start">
         {swapCourses.map((swapCourse, index) => (
@@ -147,12 +144,13 @@ const EditUserSwapCourses = () => {
                 // Render text for cards not in edit mode
                 <>
                 <h5 className="card-title">User ID: {swapCourse.user}</h5>
-                <p>Why Swap: {swapCourse.semester}</p>
-                <p>Dealer Course: {swapCourse.dealerCourse}</p>
-                <p>Dealer Section: {swapCourse.dealerSection}</p>
-                <p>Interested Course: {swapCourse.interestedCourse.join(', ')}</p>
-                <p>Interested Sections: {swapCourse.interestedSections.join(', ')}</p>
-                <p>Is Available: {swapCourse.isAvailable ? 'Yes' : 'No'}</p>
+                <p>Swap Reason: {swapCourse.semester}</p>
+                <p>Have: {swapCourse.dealerCourse} ({swapCourse.dealerSection})</p>
+  
+                <p>Need: {swapCourse.interestedCourse.map((course, index) => (
+    `${course} (${swapCourse.interestedSections[index]})`
+  )).join(', ')}</p>
+                <p>Availability: {swapCourse.isAvailable ? 'Yes' : 'No'}</p>
                 <p>Reward: {swapCourse.reward}</p>
                 <div className="flex justify-end space-x-2 mt-2">
                   <button onClick={() => handleDeleteSwapCourse(swapCourse)} className="btn bg-orange-500 text-white flex items-center">
@@ -163,7 +161,6 @@ const EditUserSwapCourses = () => {
                   </button>
                 </div>
               </>
-              
               )}
             </div>
           </div>
