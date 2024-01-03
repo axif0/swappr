@@ -10,13 +10,15 @@ export default {
       colors: {
         "green": "#9044e2",
         "red": "#FF0000",
-        "secondary": "#555",
         "mygreen": "#641abb",
-        "prigmayBG": "#FCFCFC",
-        "formcolor":"#28244f"
+        "prigmayBG": "#131C25",
+        "formcolor":"#28244f",
+        "thewhite":"#FFFFFF"
       }
     },
   },
   plugins: [require("daisyui")],
 }
+
+
 

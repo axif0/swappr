@@ -8,6 +8,12 @@ header, nav{
   z-index: 10001 !important;
 }
 
+/* Add this to your styles */
+.custom-faster {
+  animation-duration: 0.2s !important; /* Adjust the duration as needed */
+}
+
+
 .subtitle{
   @apply text-red uppercase tracking-wide font-semibold text-lg;
 }

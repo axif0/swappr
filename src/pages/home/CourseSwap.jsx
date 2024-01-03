@@ -41,101 +41,123 @@ const CourseSwap = () => {
   };
 
   return (
-    <div className="section-container">
-      <h2 className="text-2xl font-semibold my-4 text-center">
-        Add Swap Course Request
-      </h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="mx-auto" style={{ maxWidth: '870px' }}>
+    <div className="section-container pt-10">
+      
+      <form onSubmit={handleSubmit(onSubmit)} className="mx-auto" style={{ maxWidth: '600px' }}>
+        {/* ... */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Course Name*</span>
+            <span className="label-text text-thewhite">Your Course Code*</span>
           </label>
           <input
             type="text"
             {...register("courseName", { required: true })}
             className="input input-bordered w-full"
+            placeholder="e.g., ABC123"
           />
           {errors.courseName && (
             <p className="text-red-500">Course name is required.</p>
           )}
         </div>
+
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Why Swap*</span>
-          </label>
-          <input
-            type="text"
-            {...register("semester", { required: true })}
-            className="input input-bordered w-full"
-          />
-          {errors.semester && (
-            <p className="text-red-500">Semester is required.</p>
-          )}
-        </div>
-        <div className="form-control w-full">
-          <label className="label">
-            <span className="label-text">Section*</span>
+            <span className="label-text text-thewhite">Your Course Section*</span>
           </label>
           <input
             type="text"
             {...register("section", { required: true })}
             className="input input-bordered w-full"
+            placeholder="e.g., A01"
           />
           {errors.section && (
             <p className="text-red-500">Section is required.</p>
           )}
         </div>
+
+        {/* ... */}
+        
+        {/* ... */}
+        
+        {/* ... */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Interested Course*</span>
+            <span className="label-text text-thewhite">Interested Course*</span>
           </label>
           <input
             type="text"
             {...register("interestedCourse", { required: true })}
             className="input input-bordered w-full"
+            placeholder="e.g., XYZ456"
           />
           {errors.interestedCourse && (
             <p className="text-red-500">Interested course is required.</p>
           )}
         </div>
+        {/* ... */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Interested Section*</span>
+            <span className="label-text text-thewhite">Interested Section*</span>
           </label>
           <input
             type="text"
             {...register("interestedSection", { required: true })}
             className="input input-bordered w-full"
+            placeholder="e.g., B02"
           />
           {errors.interestedSection && (
             <p className="text-red-500">Interested section is required.</p>
           )}
         </div>
+
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Reward*</span>
+            <span className="label-text text-thewhite">Swap Reason*</span>
+          </label>
+          <input
+            type="text"
+            {...register("semester", { required: true })}
+            className="input input-bordered w-full"
+            placeholder="e.g., Need a different schedule"
+          />
+          {errors.semester && (
+            <p className="text-red-500">Semester is required.</p>
+          )}
+        </div>
+
+        {/* ... */}
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text text-thewhite">Reward*</span>
           </label>
           <input
             type="text"
             {...register("reward", { required: true })}
             className="input input-bordered w-full"
+            placeholder="e.g., $50 Amazon gift card"
           />
           {errors.reward && (
             <p className="text-red-500">Reward is required.</p>
           )}
         </div>
+        {/* ... */}
         {errorMessage && (
           <div className="text-red-500 mb-4">{errorMessage}</div>
         )}
-        <button
-          type="submit"
-          className="btn bg-green text-white px-6"
-        >
-          Submit Swap Request
-        </button>
+  
+        <div className="pt-4">
+          <button 
+            type="submit"
+            className="btn bg-green text-white px-6"
+          >
+            Create
+          </button>
+        </div>
       </form>
     </div>
   );
+  
+  
 };
 
 export default CourseSwap;
