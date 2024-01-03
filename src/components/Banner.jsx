@@ -108,6 +108,14 @@ const Banner = () => {
           <Link to={`/swaptable`}>Available Deals</Link>
         </button>
 
+
+        <div className="pt-10">
+        <p className="text-thewhite text-start pt-10">
+            Find <a href="https://github.com/axif0/swapper" className="text-green" target="_blank" rel="noopener noreferrer">this project</a> on Github.
+          </p>
+        
+        </div>
+
         </div>
         
       </div>
