@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from 'sweetalert2';
+import 'animate.css';
 
 const Cards = ({ item }) => {
   const { 
@@ -25,19 +26,29 @@ const Cards = ({ item }) => {
       // Assuming some functionality for Add to Cart operations
       // Show a SweetAlert modal with user email and whySwap
       Swal.fire({
-        title: 'Details',
+        title: '<span class="text-thewhite">Details</span>',
         html: `
-          <p><strong>User Email:</strong> ${user}</p>
+          <p><strong class="text-thewhite">✉️ ${user} </strong></p>
           <br>
-          <p><strong>Swap Reason:</strong> ${semester}</p>
+          <p><strong class="text-thewhite">💬 ${semester}</strong></p>
           <br>
-          <p><strong>Reward:</strong> ${reward}</p>
-          <p>Student ID: ${studentId}</p>
-        <p>Contact: ${contact}</p>
+          <p><strong class="text-thewhite">🎁 ${reward}</strong></p>
+          <br>
+          <p><strong class="text-thewhite">📞 ${contact}</strong></p>
         `,
         icon: 'info',
+        background: '#180a38', // Dark background color
         showConfirmButton: false,
         showCloseButton: true,
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            custom-faster
+          `
+        },
+
+        
       });
     } else {
       Swal.fire({
@@ -49,7 +60,7 @@ const Cards = ({ item }) => {
         confirmButtonText: 'Login now!',
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate('/login', { state: { from: location } });
+          document.getElementById('my_modal_5').showModal();
         }
       });
     }
@@ -67,10 +78,11 @@ const Cards = ({ item }) => {
       </div>
       
       <div className="card-body">
-        <h2 className="card-title text-white"></h2>
-        <p><strong className="text-white">Has →</strong> {dealerCourse} ({dealerSection})</p>
-        <p><strong className="text-white">Needs →</strong> {interestedCourse.map((course, index) => `${course} (${interestedSections[index]})`).join(", ")}</p>
-        <p><strong className="text-white">Availability →</strong> <span style={{ color: isAvailable ? "lightgreen" : "red", fontWeight: "bold" }}>{isAvailable ? "Yes" : "No"}</span></p>
+        <h2 className="card-title text-purple-300">{studentId}</h2>
+        <p></p>
+        <p> <strong><span className="text-thewhite">Has → </span><span className="text-blue-200">{dealerCourse} ({dealerSection}) </span></strong></p>
+        <p> <strong><span className="text-thewhite">Needs → </span><span className="text-yellow-100">{interestedCourse.map((course, index) => `${course} (${interestedSections[index]})`).join(", ")}</span></strong></p>
+        <p> <strong className="text-thewhite">Availability → </strong> <span style={{ color: isAvailable ? "lightgreen" : "red", fontWeight: "bold" }}>{isAvailable ? "Yes" : "No"}</span></p>
 
         <div className="card-actions justify-between items-center mt-2">
           <button

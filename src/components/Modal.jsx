@@ -80,15 +80,14 @@ const Modal = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <h3 className="font-bold text-lg">Please Login!</h3>
+            <p></p>
 
             {/* email */}
             <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
+              
               <input
                 type="email"
-                placeholder="email"
+                placeholder="Email"
                 className="input input-bordered"
                 {...register("email")}
               />
@@ -96,20 +95,14 @@ const Modal = () => {
 
             {/* password */}
             <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
+              
               <input
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 className="input input-bordered"
                 {...register("password", { required: true })}
               />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover mt-2">
-                  Forgot password?
-                </a>
-              </label>
+              
             </div>
 
             {/* show errors */}
@@ -140,25 +133,21 @@ const Modal = () => {
             </div>
 
             <p className="text-center my-2">
-              Donot have an account?
-              <Link to="/signup" className="underline text-red ml-1">
+              Do not have an account?
+              <Link to="/signup" className="text-green ml-1">
                 Signup Now
               </Link>
             </p>
           </form>
           <div className="text-center space-x-3 mb-5">
-            <button
+            <p> Or, Login with   <button
               onClick={handleRegister}
-              className="btn btn-circle hover:bg-green hover:text-white"
+              className="btn btn-circle hover:bg-green hover:text-thewhite"
             >
               <FaGoogle />
-            </button>
-            <button className="btn btn-circle hover:bg-green hover:text-white">
-              <FaFacebookF />
-            </button>
-            <button className="btn btn-circle hover:bg-green hover:text-white">
-              <FaGithub />
-            </button>
+            </button>  </p>
+            
+            
           </div>
         </div>
       </div>

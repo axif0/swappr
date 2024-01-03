@@ -9,7 +9,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 const Main = () => {
   const { loading } = useContext(AuthContext);
   return (
-    <div>
+    <div className="bg-prigmayBG">
       {loading ? (
         <LoadingSpinner />
       ) : (
@@ -26,4 +26,3 @@ const Main = () => {
 };
 
 export default Main;
-

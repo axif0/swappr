@@ -71,6 +71,7 @@ const UserProfile = () => {
               type="text"
               value={user?.studentId || ''}
               className="input input-bordered"
+              placeholder="Student ID is unchangeable"
               disabled
             />
           </div>
@@ -85,18 +86,7 @@ const UserProfile = () => {
               disabled
             />
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Name</span>
-            </label>
-            <input
-              type="text"
-              {...register('name')}
-              placeholder="Your name"
-              className="input input-bordered"
-              required
-            />
-          </div>
+          
           <div className="form-control">
             <label className="label">
               <span className="label-text">Contact</span>
@@ -106,7 +96,7 @@ const UserProfile = () => {
               value={contact}
               onChange={(e) => setContact(e.target.value)}
               className="input input-bordered"
-              placeholder="Your contact"
+              placeholder="Your Facebook handle or Phone"
             />
           </div>
           <div className="form-control mt-6">
