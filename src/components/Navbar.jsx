@@ -81,7 +81,7 @@ const Navbar = () => {
         style={{ transition: 'background-color 0.3s, box-shadow 0.3s' }}
       >
         <div className="navbar-start pl-5">
-          <div className="dropdown" ref={dropdownRef}>
+          <div className="dropdown" ref={dropdownRef} bg-black>
             <label tabIndex={0} className="btn btn-ghost lg:hidden" onClick={toggleDropdown}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-8 6h8"/>
@@ -89,7 +89,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className={`menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 ${isDropdownOpen ? 'block' : 'hidden'}`}
+              className={`menu menu-sm dropdown-content mt-3 p-2 shadow bg-gray-800 rounded-box w-52 ${isDropdownOpen ? 'block' : 'hidden'}`}
             >
               {navItems}
             </ul>
