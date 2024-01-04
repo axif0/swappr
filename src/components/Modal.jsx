@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,7 @@ import { AuthContext } from "../contexts/AuthProvider";
 import axios from "axios";
 
 const Modal = () => {
+  const [isOpen, setIsOpen] = useState(true);
   const [errorMessage, seterrorMessage] = useState("");
   const { signUpWithGmail, login } = useContext(AuthContext);
 
@@ -14,19 +15,20 @@ const Modal = () => {
 
   const from = location.state?.from?.pathname || "/";
 
-  //react hook form
+  // react hook form
   const {
     register,
-    handleSubmit, reset,
+    handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    setIsOpen(false);
     const email = data.email;
     const password = data.password;
     login(email, password)
       .then((result) => {
-        // Signed in
         const user = result.user;
         const userInfor = {
           name: data.name,
@@ -35,19 +37,15 @@ const Modal = () => {
         axios
           .post("https://swapper-server.onrender.com/users", userInfor)
           .then((response) => {
-            // console.log(response);
             alert("Signin successful!");
-            navigate(from, { replace: true });
+            setIsOpen(false); // Close the modal
           });
-        // console.log(user);
-        // ...
       })
       .catch((error) => {
         const errorMessage = error.message;
         seterrorMessage("Please provide valid email & password!");
       });
-      reset()
-
+    reset();
   };
 
   // login with google
@@ -62,13 +60,17 @@ const Modal = () => {
         axios
           .post("https://swapper-server.onrender.com/users", userInfor)
           .then((response) => {
-            // console.log(response);
             alert("Signin successful!");
+            setIsOpen(false); // Close the modal
             navigate("/");
           });
       })
       .catch((error) => console.log(error));
   };
+
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
@@ -81,10 +83,7 @@ const Modal = () => {
           >
             <h3 className="font-bold text-lg">Please Login!</h3>
             <p></p>
-
-            {/* email */}
             <div className="form-control">
-              
               <input
                 type="email"
                 placeholder="Email"
@@ -92,20 +91,14 @@ const Modal = () => {
                 {...register("email")}
               />
             </div>
-
-            {/* password */}
             <div className="form-control">
-              
               <input
                 type="password"
                 placeholder="Password"
                 className="input input-bordered"
                 {...register("password", { required: true })}
               />
-              
             </div>
-
-            {/* show errors */}
             {errorMessage ? (
               <p className="text-red text-xs italic">
                 Provide a correct username & password.
@@ -113,8 +106,6 @@ const Modal = () => {
             ) : (
               ""
             )}
-
-            {/* submit btn */}
             <div className="form-control mt-4">
               <input
                 type="submit"
@@ -122,16 +113,13 @@ const Modal = () => {
                 value="Login"
               />
             </div>
-
-            {/* close btn */}
             <div
               htmlFor="my_modal_5"
               className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              onClick={() => document.getElementById("my_modal_5").close()}
+              onClick={() => setIsOpen(false)}
             >
               ✕
             </div>
-
             <p className="text-center my-2">
               Do not have an account?
               <Link to="/signup" className="text-green ml-1">
@@ -146,8 +134,6 @@ const Modal = () => {
             >
               <FaGoogle />
             </button>  </p>
-            
-            
           </div>
         </div>
       </div>

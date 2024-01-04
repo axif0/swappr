@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaFacebookF, FaGithub, FaGoogle, FaRegUser } from "react-icons/fa";
+import {  FaGoogle, FaRegUser } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import Modal from "./Modal";
 import { AuthContext } from "../contexts/AuthProvider";
@@ -23,34 +23,26 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    const email = data.email;
-    const password = data.password;
-    // console.log(email, password)
-    createUser(email, password)
-      .then((result) => {
-        // Signed up
-        const user = result.user;
-        updateUserProfile(data.email, data.photoURL).then(() => {
-          const userInfor = {
-            name: data.name,
-            email: data.email,
-          };
-          axiosPublic.post("/users", userInfor)
-            .then((response) => {
-              // console.log(response);
-              alert("Signin successful!");
-              navigate(from, { replace: true });
-            });
-        });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+  const onSubmit = async (data) => {
+    try {
+      const email = data.email;
+      const password = data.password;
+      const result = await createUser(email, password);
+      const user = result.user;
+      await updateUserProfile(data.email, data.photoURL);
+      const userInfor = {
+        name: data.name,
+        email: data.email,
+      };
+      await axiosPublic.post("/users", userInfor);
+      alert("Signup successful!");
+      navigate(from, { replace: true });
+    } catch (error) {
+      const errorMessage = error.message;
+      // Handle error by setting state and displaying message in UI
+    }
   };
-
+  
   // login with google
   const handleRegister = () => {
     signUpWithGmail()
@@ -131,12 +123,7 @@ const Signup = () => {
             />
           </div>
 
-          <div className="text-center my-2">
-            Have an account?
-            <Link to="/login">
-              <button className="ml-2 underline">Login here</button>
-            </Link>
-          </div>
+         
         </form>
         <div className="text-center space-x-3">
           <button
@@ -145,12 +132,7 @@ const Signup = () => {
           >
             <FaGoogle />
           </button>
-          <button className="btn btn-circle hover:bg-green hover:text-white">
-            <FaFacebookF />
-          </button>
-          <button className="btn btn-circle hover:bg-green hover:text-white">
-            <FaGithub />
-          </button>
+       
         </div>
       </div>
     </div>
