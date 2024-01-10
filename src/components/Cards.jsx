@@ -1,17 +1,18 @@
+import axios from 'axios'; // Import axios here
 import React, { useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from 'sweetalert2';
 import 'animate.css';
+// import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
-const Cards = ({ item }) => {
-  const { 
-    user, semester, dealerCourse, dealerSection, 
-    interestedCourse, interestedSections, isAvailable, reward,
-    studentId,contact
-  } = item;
+const Cards = ({ item, addPinnedCourse }) => {
+  const { _id, user, originalId,semester, dealerCourse, dealerSection, interestedCourse, interestedSections, isAvailable, reward, studentId, contact } = item;
+  const axiosSecure = useAxiosSecure();
 
-  const {user: currentUser} = useContext(AuthContext);
+
+  const { user: currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -20,11 +21,22 @@ const Cards = ({ item }) => {
     setIsHeartFilled(!isHeartFilled);
   };
 
+  const handlePinClick = () => {
+    if (currentUser) {
+      if (originalId) {
+        addPinnedCourse(user, [originalId]);
+      } else {
+        console.error("Error: '_id' is undefined. Item:", item);
+      }
+    } else {
+      // Show login alert
+    }
+  };
+
   const handleAddToCart = () => {
     // Assuming some functionality for Add to Cart, update as needed
     if (currentUser) {
-      // Assuming some functionality for Add to Cart operations
-      // Show a SweetAlert modal with user email and whySwap
+    //  console.log(currentUser)
       Swal.fire({
         title: '<span class="text-thewhite">Details</span>',
         html: `
@@ -47,9 +59,25 @@ const Cards = ({ item }) => {
             custom-faster
           `
         },
-
-        
+        // Include the View Sent button
+        footer: '<button class="btn bg-mygreen text-white focus:outline-none" id="viewSentBtn">View Sent Messages</button>',
+        // Attach the event listener to the button
+        didOpen: () => {
+          const viewSentBtn = document.getElementById('viewSentBtn');
+          if (viewSentBtn) {
+            viewSentBtn.addEventListener('click', handleViewSent);
+          }
+        },
+        willClose: () => {
+          // Remove the event listener when the modal is closed
+          const viewSentBtn = document.getElementById('viewSentBtn');
+          if (viewSentBtn) {
+            viewSentBtn.removeEventListener('click', handleViewSent);
+          }
+        },
       });
+
+         
     } else {
       Swal.fire({
         title: 'Please login to continue',
@@ -66,6 +94,97 @@ const Cards = ({ item }) => {
     }
   };
 
+  const handleViewSent = async () => {
+    try {
+      if (!currentUser || !currentUser.refreshToken) {
+        console.error('User not authenticated or missing token');
+        return;
+      }
+  
+      // Check if the user's ID token is available, if not, refresh it
+      if (!currentUser.stsTokenManager.accessToken) {
+        await currentUser.getIdToken(/* forceRefresh */ true);
+      }
+  
+      // Now, the user's ID token should be available
+      const response = await axiosSecure.get(`/messages/${originalId}`);
+      
+      // Check if the response has a 'messages' property, otherwise assume the data is the array of messages
+      const messages = response.data.messages || response.data;
+      
+      // Ensure messages is an array or default to an empty array
+      const messagesArray = Array.isArray(messages) ? messages : [];
+  
+      // Show a SweetAlert modal with messages
+      const { value: messageText } = await Swal.fire({
+        title: 'Messages',
+        html: messagesArray.map((message) => `
+          <p><strong>${message.currentUseremail}:</strong> ${message.text}</p>
+        `).join(''),
+        input: 'textarea',
+        inputLabel: 'Type your message here',
+        inputPlaceholder: 'Type your message...',
+        inputAttributes: {
+          'aria-label': 'Type your message here',
+        },
+        icon: 'info',
+        background: '#180a38', // Dark background color
+        showCloseButton: true,
+        showCancelButton: true,
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: '#dc3545',
+        confirmButtonText: 'Send Message',
+        cancelButtonText: 'Cancel',
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            custom-faster
+          `,
+        },
+      });
+  
+      // Check if the user clicked the "Send Message" button
+      if (messageText && messageText.trim() !== '') {
+        // Send the message to the server
+        await sendUserMessage(messageText);
+  
+        // Show a success message after sending the message
+        Swal.fire({
+          title: 'Message Sent',
+          text: 'Your message has been sent successfully.',
+          icon: 'success',
+          background: '#180a38',
+          showCloseButton: true, // Allow users to close the success message
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching or sending messages:', error.message);
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to fetch or send messages. Please try again.',
+        icon: 'error',
+        background: '#180a38',
+        showCloseButton: true, // Allow users to close the error message
+      });
+    }
+  };
+  
+  
+  
+  const sendUserMessage = async (text) => {
+    try {
+      // Send the message to the server
+      await axiosSecure.post(`/messages/${originalId}`, {
+        currentUseremail: currentUser.email,
+        text,
+      });
+    } catch (error) {
+      console.error('Error sending message:', error.message);
+      // Handle the error as needed
+    }
+  };
+  
   return (
     <div className="card bg-gray-800 shadow-xl relative mr-5 md:my-5" style={{ width: '250px', height: '350px' }}>
       <div
@@ -92,6 +211,21 @@ const Cards = ({ item }) => {
           >
             View Details
           </button>
+          <button
+          onClick={handlePinClick}
+          className="btn bg-yellow-500 text-white focus:outline-none mx-auto"
+          style={{ border: 'none' }}
+        >
+          Pin
+        </button>
+        {/* <button
+          onClick={handleviewsent}
+          className="btn bg-yellow-500 text-white focus:outline-none mx-auto"
+          style={{ border: 'none' }}
+        >
+          messages
+        </button> */}
+
         </div>
       </div>
     </div>

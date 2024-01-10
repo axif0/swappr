@@ -4,6 +4,7 @@ import Banner from '../../components/Banner';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import Footer from '../../components/Footer';
 
 const Home = () => {
  
@@ -11,6 +12,7 @@ const Home = () => {
     <div>
       <Banner />
       {/* Rest of your Home component */}
+      <Footer/>
     </div>
   );
 };

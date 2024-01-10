@@ -17,6 +17,7 @@ import ManageItems from "../pages/dashboard/admin/ManageItems";
 import UpdateMenu from "../pages/dashboard/admin/UpdateMenu";
 import SwapCourses from "../pages/home/Swaptable";
 import EditUserSwapCourses from '../pages/home/OwnCourses'; // Adjust the import based on your project structure
+import PinnedSwapTable from "../pages/home/PinnedSwapTable";
  
 const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         {
           path: "/swaptable",
           element: <SwapCourses/>
+        },
+        {
+          path: "/pinedswaptable",
+          element: <PinnedSwapTable/>
         },
         {
           path: "/swap/:userId",
