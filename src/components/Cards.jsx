@@ -60,7 +60,7 @@ const Cards = ({ item, addPinnedCourse }) => {
           `
         },
         // Include the View Sent button
-        footer: '<button class="btn bg-mygreen text-white focus:outline-none" id="viewSentBtn">View Sent Messages</button>',
+        footer: '<button class="btn bg-mygreen text-white focus:outline-none" id="viewSentBtn">View Comments</button>',
         // Attach the event listener to the button
         didOpen: () => {
           const viewSentBtn = document.getElementById('viewSentBtn');
@@ -117,15 +117,14 @@ const Cards = ({ item, addPinnedCourse }) => {
   
       // Show a SweetAlert modal with messages
       const { value: messageText } = await Swal.fire({
-        title: 'Messages',
+        title: 'Comments',
         html: messagesArray.map((message) => `
           <p><strong>${message.currentUseremail}:</strong> ${message.text}</p>
         `).join(''),
         input: 'textarea',
-        inputLabel: 'Type your message here',
-        inputPlaceholder: 'Type your message...',
+        inputPlaceholder: 'Type your comment...',
         inputAttributes: {
-          'aria-label': 'Type your message here',
+          'aria-label': 'Type your comment here',
         },
         icon: 'info',
         background: '#180a38', // Dark background color
@@ -133,7 +132,7 @@ const Cards = ({ item, addPinnedCourse }) => {
         showCancelButton: true,
         confirmButtonColor: '#28a745',
         cancelButtonColor: '#dc3545',
-        confirmButtonText: 'Send Message',
+        confirmButtonText: 'Post',
         cancelButtonText: 'Cancel',
         showClass: {
           popup: `
@@ -151,8 +150,8 @@ const Cards = ({ item, addPinnedCourse }) => {
   
         // Show a success message after sending the message
         Swal.fire({
-          title: 'Message Sent',
-          text: 'Your message has been sent successfully.',
+          title: 'Comment Posted',
+          text: 'Your comment has been posted successfully.',
           icon: 'success',
           background: '#180a38',
           showCloseButton: true, // Allow users to close the success message

@@ -55,24 +55,27 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <Link to="/" className={`text-thewhite ${isSticky ? 'font-bold' : 'font-bold'}`} onClick={closeDropdown}>
+        <Link to="/" style={{ color: 'white' }} className={`font-bold`} onClick={closeDropdown}>
           Home
         </Link>
       </li>
+      
       <li>
-        <Link to="/pinedswaptable" className={`text-thewhite ${isSticky ? 'font-bold' : 'font-bold'}`} onClick={closeDropdown}>
-          My Pinned Course
-        </Link>
-      </li>
-      <li>
-        <Link to="/swaptable" className={`text-thewhite ${isSticky ? 'font-bold' : 'font-bold'}`} onClick={closeDropdown}>
+        <Link to="/swaptable" style={{ color: 'white' }} className={`font-bold`} onClick={closeDropdown}>
           Available Deals
         </Link>
       </li>
       {user ? (
         <li>
-          <Link to={`/swap/${user}`} className={`text-thewhite ${isSticky ? 'font-bold' : 'font-bold'}`} onClick={closeDropdown}>
+          <Link to={`/swap/${user}`} style={{ color: 'white' }} className={`font-bold`} onClick={closeDropdown}>
             My Deals
+          </Link>
+        </li>
+      ) : null}
+      {user ? (
+        <li>
+          <Link to="/pinedswaptable" style={{ color: 'white' }} className={`font-bold`} onClick={closeDropdown}>
+            Pinned Deals
           </Link>
         </li>
       ) : null}
@@ -80,28 +83,29 @@ const Navbar = () => {
   );
 
   return (
-    <header className={`max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out bg-purple-900`}>
+    <header className={`max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out bg-violet-950`}>
       <div
         className="navbar"
         style={{ transition: 'background-color 0.3s, box-shadow 0.3s' }}
       >
         <div className="navbar-start pl-5">
-          <div className="dropdown" ref={dropdownRef} style={{ backgroundColor: 'black' }}>
+          <div className="dropdown rounded-lg" ref={dropdownRef} style={{ backgroundColor: 'black' }}>
             <label tabIndex={0} className="btn btn-ghost lg:hidden" onClick={toggleDropdown}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="white">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-8 6h8"/>
               </svg>
             </label>
             <ul
-              tabIndex={0}
-              className={`menu menu-sm dropdown-content mt-3 p-2 shadow bg-gray-800 rounded-box w-52 ${isDropdownOpen ? 'block' : 'hidden'}`}
-            >
-              {navItems}
-            </ul>
+  tabIndex={0}
+  className={`menu menu-sm dropdown-content mt-3 p-2 pt-4 shadow bg-gray-800 rounded-box w-52 ${isDropdownOpen ? 'block' : 'hidden'}`}
+>
+  {navItems}
+</ul>
           </div>
           <Link to="/">
-            <img src={logo} alt="logo" className="h-8" />
-          </Link>
+  <img src={logo} alt="logo" className="h-8" style={{ paddingLeft: '10px' }} />
+</Link>
+
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">

@@ -12,7 +12,6 @@ const Home = () => {
     <div>
       <Banner />
       {/* Rest of your Home component */}
-      <Footer/>
     </div>
   );
 };
