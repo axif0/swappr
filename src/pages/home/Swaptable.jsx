@@ -138,8 +138,7 @@ const SwapCourses = () => {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
- {filteredSwapCourses.map((swapCourse, index) => {
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"> {filteredSwapCourses.map((swapCourse, index) => {
    
   return <Cards key={index} item={swapCourse} addPinnedCourse={addPinnedCourse} />;
 })}

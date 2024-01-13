@@ -51,15 +51,25 @@ const PinnedSwapTable = () => {
   
       // Show a SweetAlert modal with messages
       const { value: messageText } = await Swal.fire({
-        title: 'Messages',
-        html: messagesArray.map((message) => `
-          <p><strong>${message.currentUseremail}:</strong> ${message.text}</p>
-        `).join(''),
+        title: 'Comments',
+        html: `
+          <div class="text-white" style="max-height: 300px; overflow-y: auto;">
+            ${messagesArray.map((message) => `
+              <div style="margin-bottom: 10px;">
+                <strong class="font-bold" style="color: skyblue;">
+                  ${message.currentUseremail}:
+                </strong>
+                <span style="word-break: break-word; display: inline-block; max-width: calc(100% - 20px);">
+                  ${message.text}
+                </span>
+              </div>
+            `).join('')}
+          </div>
+        `,
         input: 'textarea',
-        inputLabel: 'Type your message here',
-        inputPlaceholder: 'Type your message...',
+        inputPlaceholder: 'Type your comment...',
         inputAttributes: {
-          'aria-label': 'Type your message here',
+          'aria-label': 'Type your comment here',
         },
         icon: 'info',
         background: '#180a38', // Dark background color
@@ -67,7 +77,7 @@ const PinnedSwapTable = () => {
         showCancelButton: true,
         confirmButtonColor: '#28a745',
         cancelButtonColor: '#dc3545',
-        confirmButtonText: 'Send Message',
+        confirmButtonText: 'Post',
         cancelButtonText: 'Cancel',
         showClass: {
           popup: `
@@ -77,6 +87,8 @@ const PinnedSwapTable = () => {
           `,
         },
       });
+      
+      
   
       // Check if the user clicked the "Send Message" button
       if (messageText && messageText.trim() !== '') {
@@ -195,7 +207,7 @@ const PinnedSwapTable = () => {
   className="btn bg-mygreen text-white focus:outline-none mx-auto"
   style={{ border: 'none' }}
 >
-  View sent Messages
+  View Comments
 </button>
 
       <button
