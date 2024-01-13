@@ -28,7 +28,7 @@ const UserProfile = () => {
 
     try {
       // Update contact in the database
-      const response = await axios.put(`http://localhost:6001/studentInfo/updateContact/${user.email}`, { contact });
+      const response = await axios.put(`https://swapper-server.onrender.com/studentInfo/updateContact/${user.email}`, { contact });
 
       console.log(response)
       if (response.status === 200) {

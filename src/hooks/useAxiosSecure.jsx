@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom"
 import useAuth from "../hooks/useAuth";
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:6001/',
+    baseURL: 'https://swapper-server.onrender.com/',
 })
 
 const useAxiosSecure = () => {

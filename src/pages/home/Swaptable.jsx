@@ -29,7 +29,7 @@ const SwapCourses = () => {
       }
 
       // Assuming email is in swapCourses.user property, modify if needed
-      const response = await axios.post(`http://localhost:6001/studentInfo/addSwapRequests/${user.email}`, {
+      const response = await axios.post(`https://swapper-server.onrender.com/studentInfo/addSwapRequests/${user.email}`, {
         swapRequestIds: swapRequestIds,
       });
       console.log("print",response)
