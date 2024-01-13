@@ -11,7 +11,7 @@ const useCart = () => {
         queryKey: ['carts', user?.email],
         queryFn: async () => {
             try {
-                const res = await fetch(`https://swapper-server.onrender.com/carts?email=${user?.email}`, {
+                const res = await fetch(`http://localhost:6001/carts?email=${user?.email}`, {
                     headers: {
                         authorization: `Bearer ${token}`
                     }

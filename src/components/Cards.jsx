@@ -114,13 +114,28 @@ const Cards = ({ item, addPinnedCourse }) => {
       
       // Ensure messages is an array or default to an empty array
       const messagesArray = Array.isArray(messages) ? messages : [];
-  
+      const tableHTML = `
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${messagesArray.map((message) => `
+            <tr>
+              <td>${message.currentUseremail}</td>
+              <td>${message.text}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
       // Show a SweetAlert modal with messages
       const { value: messageText } = await Swal.fire({
         title: 'Comments',
-        html: messagesArray.map((message) => `
-          <p><strong>${message.currentUseremail}:</strong> ${message.text}</p>
-        `).join(''),
+        html: tableHTML,
         input: 'textarea',
         inputPlaceholder: 'Type your comment...',
         inputAttributes: {

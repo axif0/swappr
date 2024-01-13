@@ -18,6 +18,19 @@ const AllMessages = () => {
       return res.data;
     },
   });
+  const handleDeleteClick = async (swapRequestId) => {
+    if (window.confirm('Are you sure you want to delete this message?')) {
+      try {
+        console.log(swapRequestId)
+        await axiosSecure.delete(`/messages/${swapRequestId}`);
+        refetch();
+      } catch (error) {
+        console.error(error);
+      }
+    }
+   };
+   
+  
 
   return (
     <div className="max-w-screen-lg mx-auto p-8">
@@ -30,6 +43,8 @@ const AllMessages = () => {
               <th className="px-6 py-4">ID</th>
               <th className="px-6 py-4">Swap Request ID</th>
               <th className="px-6 py-4">Messages</th>
+              <th className="px-6 py-4">Action</th>
+
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -45,6 +60,14 @@ const AllMessages = () => {
                       <p className="text-gray-500">{formatDate(msg.timestamp)}</p>
                     </div>
                   ))}
+                </td>
+                <td className="px-6 py-4">
+                  <button
+                    onClick={() => handleDeleteClick(message.swapRequestId)} // Use the unique identifier (_id) for delete
+                    className="text-red-600 hover:text-red-800 focus:outline-none"
+                  >
+                    <FaTrashAlt />
+                  </button>
                 </td>
               </tr>
             ))}

@@ -3,7 +3,7 @@ import React from 'react'
 
 
 const axiosPublic =  axios.create({
-    baseURL: 'https://swapper-server.onrender.com/',
+    baseURL: 'http://localhost:6001/',
   })
 
 const useAxiosPublic = () => {

@@ -35,7 +35,7 @@ const Modal = () => {
           email: data.email,
         };
         axios
-          .post("https://swapper-server.onrender.com/users", userInfor)
+          .post("http://localhost:6001/users", userInfor)
           .then((response) => {
             alert("Signin successful!");
             setIsOpen(false); // Close the modal
@@ -58,7 +58,7 @@ const Modal = () => {
           email: result?.user?.email,
         };
         axios
-          .post("https://swapper-server.onrender.com/users", userInfor)
+          .post("http://localhost:6001/users", userInfor)
           .then((response) => {
             alert("Signin successful!");
             setIsOpen(false); // Close the modal

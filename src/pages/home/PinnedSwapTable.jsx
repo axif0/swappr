@@ -137,7 +137,7 @@ const PinnedSwapTable = () => {
 
     console.log()
 
-      const res = await axiosSecure.delete(`https://swapper-server.onrender.com/studentInfo/pinnedCourses/delete/${user.email}/${pinnedCourse._id}`);
+      const res = await axiosSecure.delete(`http://localhost:6001/studentInfo/pinnedCourses/delete/${user.email}/${pinnedCourse._id}`);
       alert(`Pinned course for user ${user.email} is removed from the database`);
 
       // Optionally refetch if you want to confirm the server state

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
-    "@tanstack/react-query": "^5.8.9",
+    "@tanstack/react-query": "^5.17.10",
     "animate.css": "^4.1.1",
     "axios": "^1.6.5",
     "date-fns": "^3.0.6",

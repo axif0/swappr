@@ -27,15 +27,8 @@ const sharedLinks = (
         <MdDashboard /> Home
       </Link>
     </li>
-    <li>
-        <Link to="/menu"><FaCartShopping/> Menu</Link>
-    </li>
-    <li>
-        <Link to="/menu"><FaLocationArrow/> Orders Tracking</Link>
-    </li>
-    <li>
-        <Link to="/menu"><FaQuestionCircle/> Customer Support</Link>
-    </li>
+     
+    
   </>
 );
 
@@ -86,17 +79,7 @@ const DashboardLayout = () => {
               <MdDashboard /> Dashboard
             </Link>
           </li>
-          <li>
-            <Link to="/dashboard">
-              <FaShoppingBag /> Manage Bookings
-            </Link>
-          </li>
-          <li>
-            <Link to="/dashboard/add-menu">
-              <FaPlusCircle />
-              Add Menu
-            </Link>
-          </li>
+         
           <li>
             <Link to="/dashboard/manage-items">
               <FaEdit /> Manage Items
@@ -108,9 +91,7 @@ const DashboardLayout = () => {
             </Link>
           </li>
           <li>
-  <Link to="/dashboard/create-semester">
-    <FaCalendarAlt /> Create Semester
-  </Link>
+ 
 </li>
 
           <hr />
