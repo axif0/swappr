@@ -282,21 +282,21 @@ const PinnedSwapTable = () => {
   className="btn bg-mygreen text-white focus:outline-none mx-auto"
   style={{ border: 'none' }}
 >
-  View Comments
+  Comment
 </button>
 
       <button
         onClick={() => handleDeletePinnedCourse(pinnedCourse)}
         className="btn bg-orange-500 text-white flex items-center font-bold"
       >
-        <FaTrashAlt className="mr-1" /> Delete
+        <FaTrashAlt className="mr-1" />  
       </button>
        {/* Notification icon to send email */}
        <button
                     onClick={() => handleSendEmail(pinnedCourse.user)}
                     className="btn bg-blue-500 text-white flex items-center font-bold"
                   >
-                    📧 Send Email
+                    📧 Notify
                   </button>
     </div>
   </>
