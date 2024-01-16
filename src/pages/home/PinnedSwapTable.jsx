@@ -2,9 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { AuthContext } from '../../contexts/AuthProvider';
-import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { FaEnvelope,FaTrashAlt, FaEdit } from 'react-icons/fa';
 import LoadingSpinner from '../../components/LoadingSpinner'; // Import the LoadingSpinner component
 import Swal from 'sweetalert2';
+ 
 
 const PinnedSwapTable = () => {
   const axiosSecure = useAxiosSecure();
@@ -27,6 +28,80 @@ const PinnedSwapTable = () => {
     },
     enabled: !!user,
   });
+  const handleSendEmail = (userEmail) => {
+    // Show a SweetAlert modal for email confirmation
+    Swal.fire({
+      title: 'Send Email',
+      text: `Are you sure you want to send an email to ${userEmail}?`,
+      icon: 'question',
+      background: '#180a38',
+      showCloseButton: true,
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: 'Yes, send email!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Show a SweetAlert modal for editing the email content
+        Swal.fire({
+          title: 'Compose Email',
+          input: 'textarea',
+          inputPlaceholder: `Type your email content here...\n\nCard Information:\n${user}`,
+          inputAttributes: {
+            'aria-label': 'Type your email content here',
+          },
+          icon: 'info',
+          background: '#180a38',
+          showCloseButton: true,
+          showCancelButton: true,
+          confirmButtonColor: '#28a745',
+          cancelButtonColor: '#dc3545',
+          confirmButtonText: 'Send Email',
+          cancelButtonText: 'Cancel',
+          showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInUp
+              custom-faster
+            `,
+          },
+        }).then((result) => {
+          if (result.isConfirmed && result.value.trim() !== '') {
+            // Send the email
+            sendEmail(userEmail, result.value);
+          }
+        });
+      }
+    });
+  };
+
+  const sendEmail = async (to, content) => {
+    try {
+      // Send the email using your server endpoint
+      await axiosSecure.post('/email/send', { to, subject: 'Subject', text: content });
+
+      // Show a success message after sending the email
+      Swal.fire({
+        title: 'Email Sent',
+        text: 'Your email has been sent successfully.',
+        icon: 'success',
+        background: '#180a38',
+        showCloseButton: true,
+      });
+    } catch (error) {
+      console.error('Error sending email:', error.message);
+      // Show an error message if sending the email fails
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to send email. Please try again.',
+        icon: 'error',
+        background: '#180a38',
+        showCloseButton: true,
+      });
+    }
+  };
+
   const handleViewSent = async (originalId) => {
     try {
  
@@ -216,6 +291,13 @@ const PinnedSwapTable = () => {
       >
         <FaTrashAlt className="mr-1" /> Delete
       </button>
+       {/* Notification icon to send email */}
+       <button
+                    onClick={() => handleSendEmail(pinnedCourse.user)}
+                    className="btn bg-blue-500 text-white flex items-center font-bold"
+                  >
+                    📧 Send Email
+                  </button>
     </div>
   </>
 </div>
