@@ -1,6 +1,6 @@
 # Swappr
 
-Swappr is a project that does X, Y, and Z. It aims to provide a solution for...
+This repository indicates a frontend website called swappr, which we build for our university course exchange one student and another. 
 
 ## Getting Started
 
