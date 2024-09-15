@@ -14,9 +14,8 @@ Swappr is an online platform designed to simplify and enhance the course-swappin
 ## Features
 
 - **User Registration and Login**: Secure registration and login system for BRACU students.
-- **Course Swapping**: Seamlessly swap courses with other students.
 - **Search and Filter**: Find available courses and potential swaps using search and filter options.
-- **User Profile**: Manage your profile and track swap history.
+- **Manage Your Swap Posts**: Manage your swap posts/deals on the go.
   
 ## Installation
 
