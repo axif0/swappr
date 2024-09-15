@@ -42,7 +42,7 @@ To set up Swappr locally, follow these steps:
     npm start
     ```
 
-** You can find the backend [here](https://github.com/axif0/swapper-server).**
+# You can find the backend [here](https://github.com/axif0/swapper-server).
 
 ## Usage
 
