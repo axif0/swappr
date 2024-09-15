@@ -46,6 +46,8 @@ To set up Swappr locally, follow these steps:
 
 ## How to Use
 
+   ![How to use](screenshots/how-to-use.jpg)
+
 1. **Register** on the platform using your BRACU student credentials.
 2. **Login** and navigate through the platform using the navigation menu.
 
