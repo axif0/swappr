@@ -1,4 +1,3 @@
-
 # Swappr
 
 Swappr is an online platform designed to simplify and enhance the course-swapping process for students at BRAC University. The platform allows students to easily connect with peers who are looking to swap courses, making the process more efficient and user-friendly.
@@ -7,7 +6,7 @@ Swappr is an online platform designed to simplify and enhance the course-swappin
 
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
+- [How to Use](#how-to-use)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -17,7 +16,7 @@ Swappr is an online platform designed to simplify and enhance the course-swappin
 - **User Registration and Login**: Secure registration and login system for BRACU students.
 - **Search and Filter**: Find available courses and potential swaps using search and filter options.
 - **Manage Your Swap Posts**: Manage your swap posts/deals on the go.
-  
+
 ## Installation
 
 To set up Swappr locally, follow these steps:
@@ -45,13 +44,28 @@ To set up Swappr locally, follow these steps:
 
 #### You can find the backend [here](https://github.com/axif0/swapper-server).
 
-## Usage
+## How to Use
 
 1. **Register** on the platform using your BRACU student credentials.
-2. **Login** and navigate to the course swapping section.
-3. **Search** for courses you are interested in swapping.
-4. **Request a swap** with another student through comment section, contact email or facebook handle.
-5. **Manage** your swap requests through the dashboard.
+2. **Login** and navigate through the platform using the navigation menu.
+
+   ![Navigation](screenshots/nav.jpg)
+
+3. **Create a Swap Post** to offer a course for swapping.
+
+   ![Create a Swap Post](screenshots/create.jpg)
+
+4. **Manage Your Deals** through the "My Deals" section to keep track of your active swap requests.
+
+   ![My Deals](screenshots/my-deals.jpg)
+
+5. **Browse Available Deals** to find courses that others have listed for swapping.
+
+   ![Available Deals](screenshots/available-deals.jpg)
+
+6. **View and Edit Your Profile** to manage your personal information.
+
+   ![Profile](screenshots/profile.jpg)
 
 ## Contributing
 
